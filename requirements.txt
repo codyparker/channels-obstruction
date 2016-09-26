@@ -1,0 +1,13 @@
+asgiref==0.14.0
+autobahn==0.16.0
+autopep8==1.2.4
+channels==0.17.2
+daphne==0.15.0
+Django==1.9
+django-webpack-loader==0.3.3
+djangorestframework==3.4.6
+pep8==1.7.0
+six==1.10.0
+Twisted==16.4.0
+txaio==2.5.1
+zope.interface==4.2.0

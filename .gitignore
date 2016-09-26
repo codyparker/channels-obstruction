@@ -7,3 +7,4 @@ static/bundles/
 
 .DS_Store
 .idea/
+webpack-stats.json

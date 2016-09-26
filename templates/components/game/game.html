@@ -1,0 +1,47 @@
+{% extends "base.html" %} {% load render_bundle from webpack_loader %} {% block page_javascript %} {% render_bundle 'game' %} {% endblock %} {% block main_content %}
+<div class="row">
+    <div class="col-lg-12">
+        <h3>Play Obstruction! Now!</h3>
+        <hr>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-header">
+                        <h3>Playing {{ game }}</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row ">
+                            <div class="col-sm-2 col-sm-offset-3">
+                                <div>
+                                    <div><h4>{{game.creator}}</h4></div>
+                                    <span><img src="/static/img/blue-player.png"></span>
+                                </div>
+                            </div>
+                            <div class="col-sm-2 text-center">
+                                <h2 style="height:100px;line-height:100px;">VS</h2>
+                            </div>
+                            <div class="col-sm-2">    
+                                <div>
+                                    <div><h4>{{game.opponent}}</h4></div>
+                                    <span><img src="/static/img/red-player.png"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-body" data-game={{game.id}} id="game_component">
+                    <!-- game is rendered here -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}

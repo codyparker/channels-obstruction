@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+{% load render_bundle from webpack_loader %}
+
+
+{% block page_javascript %}
+
+    <script>
+        var ws_scheme = window.location.protocol == "https:" ? "wss" : "ws";
+        var player_sock = new ReconnectingWebSocket(ws_scheme + '://' + window.location.host + "/player/");
+
+        //
+        $("#create_game").on("click", function (event) {
+            event.preventDefault();
+            var message = {
+                action: "create_game"
+            };
+
+            player_sock.send(JSON.stringify(message));
+            return false;
+        });
+
+        // listener for messages sent on the channel socket
+        player_sock.onmessage = function (message) {
+            game_list = JSON.parse(message.data);
+            // clear the list
+            $("#open_game_list").empty();
+
+            // and rebuild the list
+            for (var x = 0; x < game_list.length; x++) {
+               //console.log(game_list)
+                $("#open_game_list").append('<li class="list-group-item">' +
+                    '<span class="badge pull-left"># ' + game_list[x].id + '</span>&nbsp;&nbsp;' +
+                    '<span>'+ game_list[x].creator + ' vs ???</span>' +
+                    '<a class="btn btn-sm btn-primary pull-right" href="/game/'+game_list[x].id+'/">Play</a>' +
+                    '</li>');
+            }
+        };
+
+    </script>
+    {% render_bundle 'main' %}
+
+{% endblock %}
+
+{% block main_content %}
+    <h3>Let's play Obstruction!</h3>
+    <hr>
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    Your Games
+                </div>
+                <div class="panel-body">
+                    {% if player_games %}
+                        <ul id="open_game_list" class="list-group games-list">
+                            {% for game in player_games %}
+                                <li class="list-group-item">
+                                   <span class="badge pull-left"># {{ game.pk }}</span>&nbsp;
+                                   <span>{{ game.creator }} vs {{game.opponent|default_if_none:"???"}}</span>
+                                    <a class="btn btn-sm btn-primary pull-right
+                                             {% if not game.opponent and game.creator == request.user %}disabled{% endif %}"
+                                        href="/game/{{ game.pk }}/">
+                                        {% if game.completed %}
+                                            View
+                                        {% elif not game.opponent and game.creator == request.user%}
+                                            Waiting...
+                                        {% else %}
+                                            Play
+                                        {% endif %}</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <h4>You haven't played any games...</h4>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <span>Open Games</span>
+                    <a href="#" id="create_game"><span id="start_game" class="badge pull-right">Start New Game</span></a>
+                </div>
+                <div class="panel-body">
+                    {% if open_games %}
+                        <ul id="open_game_list" class="list-group games-list">
+                        {% for game in open_games %}
+                            <li class="list-group-item">
+                               <span class="badge pull-left"># {{ game.pk }}</span>&nbsp;
+                               <span>{{ game.creator }} vs ???</span>
+                                <a class="btn btn-sm btn-primary pull-right {% if game.creator == request.user %}disabled{% endif %}" href="/game/{{ game.pk }}/">Play</a>
+                            </li>
+                        {% endfor %}
+                        </ul>
+                    {% else %}
+                        <h4>No open games...</h4>
+                    {% endif %}
+                </div>
+            </div>
+
+        </div>
+        <div class="col-lg-4">
+            <div id="react-app"></div>
+
+        </div>
+    </div>
+
+{% endblock %}

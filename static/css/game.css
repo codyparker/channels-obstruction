@@ -1,0 +1,83 @@
+.games-list li { background: rgba(140, 199, 255, 0.63); font-weight:500;}
+.games-list li:nth-child(odd) { background: rgba(244, 244, 244, 0.41); }
+.games-list li .btn {margin-top:-5px;}
+
+#wrapper {
+  border: 1px solid black;
+  width: 450px;
+  height: 450px;
+  margin: 0 auto;
+}
+
+div {
+  contentEditable: true;
+}
+
+.filled {
+  width: 28px;
+  height: 28px;
+  background: black;
+  border: 1px solid black;
+  padding: 0;
+  margin: 0;
+  float: left;
+}
+
+.empty {
+  width: 28px;
+  height: 28px;
+  border: 1px solid black;
+  padding: 0;
+  margin: 0;
+  float: left;
+}
+
+.numbered {
+  counter-increment: value;
+}
+
+.numbered:nth-of-type(n)::before {
+  content: counter(value);
+  font-size: 10px;
+  position: absolute;
+}
+
+table{
+  border:2px solid #3b3a6e;
+
+}
+table td {
+  position:relative;
+  border:1px solid #3b3a6e;
+  
+}
+
+
+.player-line{
+   font-size:20px; 
+   line-height:80px;
+   margin:5px;
+}
+
+.coords{
+  top:0;
+  left:0;
+   position: absolute; 
+   z-index: 999;
+    font-size: 10px;
+  color: rgb(120, 120, 200);
+}
+
+
+.player-badge{
+  display:block;
+  margin-right:15px;
+}
+
+.creator-color {
+  background-color: #00ABD0;
+}
+
+.opponent-color {
+  background-color: #FF4C22;
+}

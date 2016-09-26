@@ -1,0 +1,9 @@
+.history/
+.vscode/
+node_modules/
+fixtures/
+static/bundles/
+**.pyc
+
+.DS_Store
+.idea/

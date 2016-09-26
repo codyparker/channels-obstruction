@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block main_content %}
+    <div class="row">
+        <div class="col-lg-12">
+            <h3>Register</h3>
+            <hr>
+
+            <form action="#" method="POST">
+                {% csrf_token %}
+                <fieldset>
+                    {% for field in form %}
+                        {% if field.errors %}
+                            <div class="control-group error">
+                                <label class="control-label">{{ field.label }}</label>
+                                <div class="controls">{{ field }}
+                        <span class="help-inline">
+                            {% for error in  field.errors %}{{ error }}{% endfor %}
+                        </span>
+                                </div>
+                            </div>
+                        {% else %}
+                            <div class="control-group">
+                                <label class="control-label">{{ field.label }}</label>
+                                <div class="controls">{{ field }}
+
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </fieldset>
+                <br>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+</form>
+            </form>
+        </div>
+    </div>
+{% endblock %}

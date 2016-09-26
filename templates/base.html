@@ -1,0 +1,79 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- LOCAL CSS -->
+    <link rel="stylesheet" href="{% static "css/game.css" %}">
+
+    {% block additional_head %}{% endblock %}
+</head>
+<body style="padding-top:65px;">
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Channels Obstruction</a>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+
+                {% if  request.user.is_authenticated %}
+                    <li>
+                        <a href="/lobby/">Lobby</a>
+                    </li>
+                    <li>
+                        <a href="/logout/">Logout</a>
+                    </li>
+                {% else %}
+                    <li>
+                        <a href="/register/">Register</a>
+                    </li>
+                    <li>
+                        <a href="/login/">Login</a>
+                    </li>
+                {% endif %}
+            </ul>
+            {% if  request.user.is_authenticated %}
+                <p class="navbar-text pull-right">Hi, {{ request.user }}</p>
+            {% endif %}
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<div class="container" style="margin-bottom:50px;">
+    {% if messages %}
+
+        {% for message in messages %}
+            <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %}"
+                 role="alert">
+                {{ message }}
+            </div>
+
+        {% endfor %}
+    {% endif %}
+    <!-- MAIN PAGE CONTENT -->
+    {% block main_content %}{% endblock %}
+</div>
+<!-- PAGE LEVEL JAVASCRIPT -->
+{% block page_javascript %} {% endblock %}
+
+</body>
+</html>

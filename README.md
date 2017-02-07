@@ -1,5 +1,7 @@
 # channels-obstruction
 A simple game of Obstruction created to explore Django + Django Channels + ReactJS
+Blog Post and Tutorial at: [http://www.codyparker.com/django-channels-with-react](http://www.codyparker.com/django-channels-with-react)
+
 
 ## Synopsis
 
@@ -32,10 +34,13 @@ This project also uses [React](https://facebook.github.io/react/) to handle the 
 * [Django Webpack Loader](https://github.com/owais/django-webpack-loader)
 * Node & Node Package Manager
 
-## Coming Soon
+## Installation
 
-There are still bugs and minor missing features. I will clean this up soon as well as put up a blog post providing a walkthrough of this application.
-
+* Fork and clone this repository
+* Create a Python virtual environemnt
+* In that environment, run ```pip install -r requirements.txt``` inside your project
+* Install node modules with ```npm install```
+* Create the local database with ```python manage.py migrate```
 
 ## License
 

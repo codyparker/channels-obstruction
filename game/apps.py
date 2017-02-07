@@ -5,4 +5,4 @@ class GameConfig(AppConfig):
     name = 'game'
 
     def ready(self):
-        import signals
+        from game import signals

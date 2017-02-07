@@ -20,7 +20,6 @@ urlpatterns = [
 urlpatterns += [
     url(r'^game-from-id/(?P<game_id>\d+)/$', SingleGameViewSet.as_view()),
     url(r'^current-user/', CurrentUserView.as_view()),
-    url(r'^claim-square/', ClaimSquareView.as_view()),
     
 ]
 router = DefaultRouter()

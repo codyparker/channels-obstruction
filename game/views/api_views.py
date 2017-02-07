@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from game.models import *
 from rest_framework.permissions import IsAuthenticated
 from django.shortcuts import get_object_or_404
-
+from django.http import Http404
 
 class UserViewSet(viewsets.ModelViewSet):
     """
@@ -71,17 +71,3 @@ class GameSquaresViewSet(viewsets.ViewSet):
         serializer = GameSquareSerializer(squares, many=True)
         return Response(serializer.data)
 
-
-class ClaimSquareView(APIView):
-
-    def get_object(self, pk):
-        try:
-            return Game.objects.get(pk=pk)
-        except Game.DoesNotExist:
-            raise Http404
-
-    def put(self, request, pk):
-        game = self.get_object(pk)
-        # update the owner
-        print(game)
-        return Response(serializer.errors)

@@ -41,6 +41,7 @@ This project also uses [React](https://facebook.github.io/react/) to handle the 
 * In that environment, run ```pip install -r requirements.txt``` inside your project
 * Install node modules with ```npm install```
 * Create the local database with ```python manage.py migrate```
+* Run webpack to build the components with ```webpack``` 
 
 ## License
 

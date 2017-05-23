@@ -2,13 +2,14 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from game.views import *
 from rest_framework.routers import DefaultRouter
+from django.contrib.auth.views import login, logout
 
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^register/', CreateUserView.as_view()),
-    url(r'^login/$', 'django.contrib.auth.views.login'),
-    url(r'^logout/$', 'django.contrib.auth.views.logout', {'next_page': '/'}),
+    url(r'^login/$', login, {'template_name': 'login.html'}),
+    url(r'^logout/$', logout, {'next_page': '/'}),
     url(r'^game/(?P<game_id>\d+)/$', GameView.as_view()),
     url(r'^lobby/$', LobbyView.as_view()),
 

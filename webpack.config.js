@@ -15,7 +15,7 @@ module.exports = {
 
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin(), // don't reload if there is an error
+    new webpack.NoEmitOnErrorsPlugin(), // don't reload if there is an error
     new BundleTracker({path: __dirname, filename: './webpack-stats.json'})
   ],
 
@@ -24,7 +24,7 @@ module.exports = {
     {
       test: /\.jsx$/,
       exclude: /(node_modules|bower_components)/,
-      loader: 'babel', // 'babel-loader' is also a legal name to reference
+      loader: 'babel-loader', 
       query: {
         presets: ['es2015', 'react']
       }
@@ -34,7 +34,7 @@ module.exports = {
 },
 
   resolve: {
-    modulesDirectories: ['node_modules', 'bower_components'],
-    extensions: ['', '.js', '.jsx']
+    modules: ['node_modules', 'bower_components'],
+    extensions: ['.js', '.jsx']
   },
 }

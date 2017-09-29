@@ -116,7 +116,7 @@ class Game(models.Model):
         Send the updated game information and squares to the game's channel group
         """
         # imported here to avoid circular import
-        from serializers import GameSquareSerializer, GameLogSerializer, GameSerializer
+        from .serializers import GameSquareSerializer, GameLogSerializer, GameSerializer
 
         squares = self.get_all_game_squares()
         square_serializer = GameSquareSerializer(squares, many=True)
